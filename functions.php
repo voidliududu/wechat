@@ -19,7 +19,8 @@ function check_signature(){
     response();
   }
 }
-//
+
+//this is the main body of the project,all the functions are called by this function
 function response()
 {
     //$data = $GLOBALS['HTTP_RAW_POST_DATA'];
@@ -67,7 +68,9 @@ function response()
 <Content><![CDATA[你好]]></Content>
 </xml>*/
 
-
+/*TODO untest function
+ * to query cet4 score by name and admiter
+ */
 function cet4($request){
     $info = explode(' ',$request);
     if($info[0] == 'cet4') {

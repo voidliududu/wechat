@@ -5,6 +5,9 @@
  * Date: 17-3-16
  * Time: 下午10:17
  */
+/*
+ * response text by client(object) and msg
+ * */
 function responseText($client,$msg){
     $toUserName      = $client->FromUserName;
     $FromUserName    = $client->ToUserName;
@@ -20,6 +23,9 @@ function responseText($client,$msg){
     $Message = sprintf($tpl,$toUserName,$FromUserName,$time,$msgType,$msg);
     echo $Message;
 }
+/*
+ * select the type of functions from user's input and specifiy the intend of users
+ * */
 function fliter($request)
 {
     $patten = array(
@@ -33,7 +39,8 @@ function fliter($request)
     return "default";
 }
 /*
- * @Throw curl exception timeout
+ *TODO @Throw curl exception timeout
+ *
  * */
 function CurlHelper($method,$url,array $para){
     $ch = curl_init();
