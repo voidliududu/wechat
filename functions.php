@@ -131,9 +131,7 @@ function cet4($request){
                     <th>总<span class='space'>&nbsp;</span>分：</th>
                     <td  colspan="2" class="fontBold" >
         <span class="colorRed">
-
 459
-
         </span>
                     </td>
                 </tr>
