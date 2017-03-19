@@ -98,5 +98,4 @@ class Matrix
             $this->set($s,$j,$this->get($s,$j)*$k);
         }
     }
-
 }

@@ -69,7 +69,7 @@ function response()
 </xml>*/
 
 /*TODO untest function
- * to query cet4 score by name and admiter
+ * to query cet4 score by name and admiterReferer: http://www.chsi.com.cn/cet/
  */
 function cet4($request){
     $info = explode(' ',$request);
@@ -79,22 +79,22 @@ function cet4($request){
             'xm' => $info[2]
         );
         $url = 'http://www.chsi.com.cn/cet/query';
-        $content = CurlHelper('GET',$url,$query);
-    $totalPatten = '(?<=<span\sclass="colorRed">)\d+?(?=</span>)';
-    $listenPatten = '(?<=<span class="color999">听<span class=\'space_long\'>&nbsp;</span>力：</span>
-                    </th>
-                    <td>)\d+?(?=</td>)';
-    $readPatten = '(?<=<span class="color999">阅<span class=\'space_long\'>&nbsp;</span>读：</span>
-                    </th>
-                    <td>)\d+?(?=</td>)';
-    $writingPatten = '(?<=<span class="color999">写作和翻译：</span>
-                    </th>
-                    <td>)\d+?(?= </td>)';
+        $content = CurlHelper('GET',$url,$query,array('Referer:http://www.chsi.com.cn/cet/'));
+        //var_dump($content);
+    $totalPatten = '((?<=(<span class="colorRed">))[\W\w]*?(?=(</span>)))';
+    $listenPatten = '((?<=(<span class="color999">听<span class=\'space_long\'>&nbsp;</span>力：</span></th><td>))[\W\w]*?(?=(</td>)))';
+    $readPatten = '((?<=(<span class="color999">阅<span class=\'space_long\'>&nbsp;</span>读：</span></th><td>))[\W\w]*?(?=</td>))';
+    $writingPatten = '((?<=(<span class="color999">写作和翻译：</span></th><td>))[\W\w]*?(?=(</td>)))';
     preg_match_all($totalPatten,$content,$total);
-    preg_match_all($listenPatten,$content,$listen);
+   /* preg_match_all($listenPatten,$content,$listen);
     preg_match_all($writingPatten,$content,$writing);
     preg_match_all($readPatten,$content,$read);
-    return 'total:'.$total.'$listen:'.$listen.'writing:'.$writing.'read:'.$read;
+    var_dump($total);
+    var_dump($listen);
+    var_dump($writing);
+    var_dump($read);*/
+   return "cet4 total:".trim($total);
+    //return 'total:'.$total.'$listen:'.$listen.'writing:'.$writing.'read:'.$read;
 
     }
 }

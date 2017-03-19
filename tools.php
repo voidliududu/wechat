@@ -42,7 +42,7 @@ function fliter($request)
  *TODO @Throw curl exception timeout
  *
  * */
-function CurlHelper($method,$url,array $para){
+function CurlHelper($method,$url,array $para = array(),array $header = array()){
     $ch = curl_init();
     if($method == 'POST'){
         $curl_options = array(
@@ -50,7 +50,8 @@ function CurlHelper($method,$url,array $para){
             CURLOPT_URL => $url,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $para,
-            CURLOPT_RETURNTRANSFER => true
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER =>$header
         );
     }else{
         foreach( $para as $key => $value ){
@@ -61,7 +62,8 @@ function CurlHelper($method,$url,array $para){
         $curl_options = array(
             CURLOPT_TIMEOUT => 5,
             CURLOPT_URL => $raw_url,
-            CURLOPT_RETURNTRANSFER => true
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => $header
         );
     }
     curl_setopt_array($ch,$curl_options);
