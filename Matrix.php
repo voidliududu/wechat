@@ -8,12 +8,13 @@
  */
 class Matrix
 {
+    private $rawMatrix;
     private $matrix;
     private $row;     //define the number of row
     private $col;     //define the number of column
     public function __construct(array $arr)
     {
-        $this->matrix = $arr;
+        $this->rawMatrix = $this->matrix = $arr;
         $this->col = count($arr);
         $this->row = count($arr[0]);
     }
@@ -47,7 +48,10 @@ class Matrix
             return null;
         }
     }
-    //to exchange two column
+    /*
+     * @param $i $j the column you want to exchange
+     * to exchange two column
+    */
     private function changeCol($i,$j)
     {
         if($i < $this->col and $j < $this->col){
@@ -60,4 +64,39 @@ class Matrix
             return null;
         }
     }
+    /*
+     * @param $i the row you want to multiply
+     * @param $n the factor you want to multiply
+     *
+     * */
+    private function multiplyRow($i,$n)
+    {
+        for($s = 1;$s <= $this->col;$s++){
+            $this->set($i,$s,$this->get($i,$s)*$n);
+        }
+    }
+    private function multiplyCol($i,$n)
+    {
+        for($s = 1;$s <= $this->row;$s++){
+            $this->set($s,$i,$this->get($s,$i)*$n);
+        }
+    }
+    /*
+     * @param $i the raw row
+     * @param $j the target row
+     * @param $k the factor of the raw row
+     * */
+    private function addToRow($i,$j,$k = 1)
+    {
+        for($s = 1;$s <= $this->col;$s++){
+            $this->set($j,$s,$this->get($i,$s)*$k);
+        }
+    }
+    private function addToCol($i,$j,$k = 1)
+    {
+        for($s = 1;$s <= $this->row;$s++){
+            $this->set($s,$j,$this->get($s,$j)*$k);
+        }
+    }
+
 }
