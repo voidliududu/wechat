@@ -68,8 +68,8 @@ function response()
 <Content><![CDATA[你好]]></Content>
 </xml>*/
 
-/*TODO untest function
- * to query cet4 score by name and admiterReferer: http://www.chsi.com.cn/cet/
+
+/* to query cet4 score by name and admiterReferer: http://www.chsi.com.cn/cet/
  */
 function cet4($request){
     $info = explode(' ',$request);
@@ -93,7 +93,7 @@ function cet4($request){
     var_dump($listen);
     var_dump($writing);
     var_dump($read);*/
-   return "cet4 total:".trim($total);
+   return "cet4 total:".trim($total[0][0]);
     //return 'total:'.$total.'$listen:'.$listen.'writing:'.$writing.'read:'.$read;
 
     }

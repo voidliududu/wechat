@@ -29,10 +29,10 @@ function responseText($client,$msg){
 function fliter($request)
 {
     $patten = array(
-        'cet4' => "^cet4\s\d{15}\s\W{2}$",
+        'cet4' => "/cet4\s\d{15}\s\W{2}/",
     );
     foreach ($patten as $key => $value) {
-        if (preg_grep($value, $request)) {
+        if (preg_match($value, $request)) {
             return $key;
         }
     }

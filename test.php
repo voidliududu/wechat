@@ -9,3 +9,5 @@ require_once ('functions.php');
 require_once ('tools.php');
 $request = "cet4 430021162127726 刘都都";
 $result = cet4($request);
+//var_dump(fliter($request));
+var_dump($result);
