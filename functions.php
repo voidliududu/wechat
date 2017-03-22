@@ -109,7 +109,6 @@ function cet4($request){
 
 function checkMatrix($request){
     $row = explode("\n",$request);
-    var_dump($row);
     foreach($row as $value){
         if($value == 'matrix'){
             continue;
