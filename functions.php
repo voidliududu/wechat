@@ -55,7 +55,7 @@ function response()
                 $msg = cet4($request);
                 break;
             case 'matrix':
-                $msg = matrix($request);
+                $msg = matrixCaculator($request);
                 break;
             case 'default':
                 $msg = $request;

@@ -35,8 +35,8 @@ echo $m;*/
 require_once ("functions.php");
 require_once 'tools.php';
 $request = "matrix
-3 4 5
-2 5 7
-9 6 4";
+1 2 3
+5 6 7
+4 2 3";
 echo fliter($request);
 echo matrixCaculator($request);
