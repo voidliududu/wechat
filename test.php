@@ -39,4 +39,4 @@ $request = "matrix
 2 5 7
 9 6 4";
 echo fliter($request);
-//echo matrixCaculator($request);
+echo matrixCaculator($request);

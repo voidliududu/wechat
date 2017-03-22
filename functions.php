@@ -121,7 +121,6 @@ function checkMatrix($request){
            }
        }else{
            $num = count($t);
-           echo $num;
        }
        $temp[] = $t;
     }
