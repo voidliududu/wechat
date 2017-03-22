@@ -123,7 +123,7 @@ class Matrix
         foreach($this->matrix as $key => $value){
             $str[] = implode(" ",$value);
         }
-        $string = implode('\n',$str);
+        $string = implode("\n",$str);
         return $string;
     }
 }
