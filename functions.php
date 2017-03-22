@@ -133,7 +133,7 @@ function matrixCaculator($request)
     if ($f = checkMatrix($request)) {
         require_once 'Matrix.php';
         $m = new matrix($f);
-        return $m;
+        return $m->__toString();
     } else {
         return "您输入的矩阵不能被识别";
     }
