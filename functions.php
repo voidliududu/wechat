@@ -48,7 +48,7 @@ function response()
 
     }else{
         if(strtolower($client->MsgType) == 'text'){
-        $request = trim($client->Content);
+        $request = $client->Content;
         $flag = fliter($request);
         switch($flag){
             case 'cet4':
@@ -56,6 +56,9 @@ function response()
                 break;
             case 'matrix':
                 $msg = matrix($request);
+                break;
+            case 'default':
+                $msg = $request;
                 break;
             default:
                 $msg = $request;
