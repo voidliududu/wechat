@@ -54,6 +54,9 @@ function response()
             case 'cet4':
                 $msg = cet4($request);
                 break;
+            case 'matrix':
+                $msg = matrix($request);
+                break;
         }
         responseText($client,$msg);
         }
@@ -98,6 +101,81 @@ function cet4($request){
 
     }
 }
+
+function checkMatrix($request){
+    $row = explode("\n",$request);
+    var_dump($row);
+    foreach($row as $value){
+        if($value == 'matrix'){
+            continue;
+        }
+        $t= explode(" ",$value);
+       if(isset($num)){
+           if($num != count($t)){
+               return false;
+           }
+       }else{
+           $num = count($t);
+           echo $num;
+       }
+       $temp[] = $t;
+    }
+    return $temp;
+}
+
+function matrixCaculator($request){
+    if($f = checkMatrix($request)){
+        require_once 'Matrix.php';
+        $m = new matrix($f);
+        return $m;
+    }else{
+        return "您输入的矩阵不能被识别";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
