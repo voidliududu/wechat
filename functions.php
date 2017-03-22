@@ -57,6 +57,8 @@ function response()
             case 'matrix':
                 $msg = matrix($request);
                 break;
+            default:
+                $msg = $request;
         }
         responseText($client,$msg);
         }
@@ -123,12 +125,13 @@ function checkMatrix($request){
     return $temp;
 }
 
-function matrixCaculator($request){
-    if($f = checkMatrix($request)){
+function matrixCaculator($request)
+{
+    if ($f = checkMatrix($request)) {
         require_once 'Matrix.php';
         $m = new matrix($f);
         return $m;
-    }else{
+    } else {
         return "您输入的矩阵不能被识别";
     }
 }

@@ -5,7 +5,8 @@
  * Date: 17-3-16
  * Time: 下午10:17
  */
-/*matrix
+/*
+matrix
 1 2 3
 4 5 6
 7 8 9
@@ -34,7 +35,7 @@ function fliter($request)
 {
     $patten = array(
         'cet4' => "/cet4\s\d{15}\s\W{2}/",
-        'matrix' =>'/matrix\n((\d\s)+\d\n)+(\d\s)+/'
+        'matrix' =>'/matrix\n((\d+\s)+\d+\n)+(\d\s)+\d+/'
     );
     foreach ($patten as $key => $value) {
         if (preg_match($value, $request)) {
