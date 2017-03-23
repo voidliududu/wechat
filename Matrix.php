@@ -10,6 +10,7 @@ class Matrix
 {
     private $rawMatrix;
     private $matrix;
+    private $uptriMartrix;
     public $row;     //define the number of row
     public $col;     //define the number of column
     public function __construct(array $arr)
@@ -17,7 +18,7 @@ class Matrix
         $this->rawMatrix = $this->matrix = $arr;
         $this->col = count($arr);
         $this->row = count($arr[0]);
-        $this->toMatrix();
+        $this->uptriMartrix = $this->toMatrix();
     }
     //to get the value of the element
     public function get($x,$y)
@@ -111,15 +112,19 @@ class Matrix
                     }
                 }
             }
+            if($this->get($i,$i) == 0){
+                continue;
+            }
             for($j = $i+1;$j <= $r;$j++){                 //$j is the row index
                 $k = -$this->get($j,$i)/$this->get($i,$i);
                 $this->addToRow($i,$j,$k);
             }
         }
+        return $this->matrix;
     }
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+        $str = [];
         foreach($this->matrix as $key => $value){
             $str[] = implode(" ",$value);
         }
