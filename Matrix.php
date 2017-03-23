@@ -10,17 +10,24 @@ class Matrix
 {
     private $rawMatrix;
     private $matrix;
-    private $uptriMartrix;
-    public $row;     //define the number of row
-    public $col;     //define the number of column
+    private $uptriMartrix;   //the up triangle matrix
+    public $row;             //define the number of row
+    public $col;            //define the number of column
+    private $attr = [];
     public function __construct(array $arr)
     {
         $this->rawMatrix = $this->matrix = $arr;
-        $this->col = count($arr);
-        $this->row = count($arr[0]);
-        $this->uptriMartrix = $this->toMatrix();
+        $this->row = count($arr);
+        $this->col = count($arr[0]);
+        $this->attr['det'] = $this->det();
+        $this->uptriMartrix = $this->touptriMatrix();
     }
-    //to get the value of the element
+    /*
+     *TODO consider to extend a param to refer to the specific matrix
+     *
+     * to get the value of elements
+     * */
+
     public function get($x,$y)
     {
         if($x <= $this->col and $y <= $this->row) {
@@ -100,7 +107,12 @@ class Matrix
             $this->set($s,$j,$this->get($s,$i)*$k);
         }
     }
-    public function toMatrix()
+
+    /*
+     * change the matrix to up triangle matrix
+     * @return $matrix
+     * */
+    public function touptriMatrix()
     {
         $r = $this->row;
         $c = $this->col;
@@ -122,6 +134,23 @@ class Matrix
         }
         return $this->matrix;
     }
+    /*
+     * to get the det of a square matrix
+     * */
+    public function det()
+    {
+        if($this->col == $this->row){
+            $t = 1;
+            for($i = 0;$i <= $this->row;$i++){
+                  $t *= $this->get($i,$i);
+            }
+            return $t;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function __toString()
     {
         $str = [];
