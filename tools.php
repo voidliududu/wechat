@@ -35,7 +35,7 @@ function fliter($request)
 {
     $patten = array(
         'cet4' => "/cet4\s\d{15}\s\W{2}/",
-        'matrix' =>'/matrix\n((\d+\s)+\d+\n)+(\d\s)+\d+/'
+        'matrix' =>'/matrix\n((-*\d+\s)+-*\d+\n)+(-*\d\s)+-*\d+/'
     );
     foreach ($patten as $key => $value) {
         if (preg_match($value, $request)) {

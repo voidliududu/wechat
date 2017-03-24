@@ -19,9 +19,29 @@ class Matrix
         $this->rawMatrix = $this->matrix = $arr;
         $this->row = count($arr);
         $this->col = count($arr[0]);
-        $this->attr['det'] = $this->det();
-        $this->uptriMartrix = $this->touptriMatrix();
+        //echo $this->__toString();
+        //$this->set(4,5,$this->get(2,3));
+        //echo $this->__toString();
+        //$this->attr['det'] = $this->det();
+        //$this->uptriMartrix = $this->touptriMatrix();
+        $this->test('toMatrix');
     }
+    private function test($f){
+        //$this->addToRow(2,3);
+        //echo "changed".$this->__toString();
+        //echo "addtorow".$this->__toString();
+        $this->$f();
+        //echo $this->row;
+        //echo $this->col;
+    }
+
+    /*
+     * to init the attr matrix to prepare for the following work
+     * */
+    private function init(){
+        $this->matrix = $this->rawMatrix;
+    }
+
     /*
      *TODO consider to extend a param to refer to the specific matrix
      *
@@ -30,7 +50,7 @@ class Matrix
 
     public function get($x,$y)
     {
-        if($x <= $this->col and $y <= $this->row) {
+        if($x <= $this->row and $y <= $this->col) {
             return $this->matrix[$x - 1][$y - 1];
         }else{
             return null;
@@ -38,16 +58,16 @@ class Matrix
     }
     //to set the value of the elements
     public function set($x,$y,$value){
-        if($x <= $this->col and $y <= $this->row) {
+        if($x <= $this->row and $y <= $this->col) {
             $this->matrix[$x - 1][$y - 1] = $value;
         }else{
             return null;
         }
     }
     //to exchange two row
-    public function changeCol($i,$j)
+    public function changeRow($i,$j)
     {
-        if($i < $this->row and $j < $this->row){
+        if($i <= $this->row and $j <= $this->row){
             for($m = 1;$m <= $this->col;$m++){
                 $temp = $this->get($i,$m);
                 $this->set($i,$m,$this->get($j,$m));
@@ -61,9 +81,9 @@ class Matrix
      * @param $i $j the column you want to exchange
      * to exchange two column
     */
-    public function changeRow($i,$j)
+    public function changeCol($i,$j)
     {
-        if($i < $this->col and $j < $this->col){
+        if($i <= $this->col and $j <= $this->col){
             for($m = 1;$m <= $this->col;$m++){
                 $temp = $this->get($m,$i);
                 $this->set($m,$i,$this->get($m,$j));
@@ -114,6 +134,7 @@ class Matrix
      * */
     public function touptriMatrix()
     {
+        $this->init();
         $r = $this->row;
         $c = $this->col;
         for($i = 1;$i <= $c;$i++){                       //$i is the col index
@@ -141,7 +162,7 @@ class Matrix
     {
         if($this->col == $this->row){
             $t = 1;
-            for($i = 0;$i <= $this->row;$i++){
+            for($i = 1;$i <= $this->row;$i++){
                   $t *= $this->get($i,$i);
             }
             return $t;
@@ -150,14 +171,59 @@ class Matrix
             return false;
         }
     }
-
+    /*
+     * to change the matrix to *** matrix
+     * */
+    public function toMatrix()
+    {
+        $this->init();
+        $r = $this->row;
+        $c = $this->col;
+        $pointer = 1;
+        for($i = 1;$i <= $c;$i++){
+            if(!$this->get($pointer,$i)){
+                for($j = $pointer+1;$j <= $r;$j++){
+                    if($this->get($j,$i)){
+                        $this->changeRow($i,$pointer);
+                    }
+                }
+                if(!$this->get($pointer,$i)){
+                    //echo $i."\n";
+                    //echo $pointer."\n";
+                    //echo $this->__toString();
+                    continue;
+                }
+            }
+            $m =$this->get($pointer,$i);
+            for($j = $pointer+1;$j <= $r;$j++){
+                if($t = $this->get($j,$i)){
+                    $k = - $t / $m;
+                    //echo "k=".$k."\n";
+                    $this->addToRow($pointer,$j,$k);
+                    //echo $this->__toString();
+                    //echo $pointer."\n".$i."\n";
+                }
+            }
+            //echo $pointer."\n";
+            //echo $this->__toString();
+            $pointer++;
+        }
+    }
     public function __toString()
     {
         $str = [];
-        foreach($this->matrix as $key => $value){
+        /*foreach($this->matrix as &$value){
+            foreach($value as &$item){
+                $item = round($item,6);
+            }
+        }*/
+        foreach($this->matrix as $value){
             $str[] = implode(" ",$value);
         }
         $string = implode("\n",$str);
-        return $string;
+        return $string."\n\n";
+    }
+    private function beautify(){
+
     }
 }
